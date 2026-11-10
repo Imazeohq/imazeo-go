@@ -8,6 +8,7 @@
 coverage.out
 coverage.html
 vendor/
+node_modules/
 .idea/
 .vscode/
 *.swp

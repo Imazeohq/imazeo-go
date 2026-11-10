@@ -1,0 +1,12 @@
+{
+  "name": "imazeo-go",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Release tooling for the Imazeo Go SDK (not an npm package)",
+  "scripts": {
+    "release": "node scripts/release.mjs"
+  },
+  "devDependencies": {
+    "release-it": "^21.1.0"
+  }
+}

@@ -156,6 +156,6 @@ credits/bandwidth. Expiry and physical cleanup are separate.
 
 Production and reference paths: /docs/outputs/, /docs/limits/, /docs/security/,
 /docs/production/ and /docs/api-reference/. The developer OpenAPI download is
-/openapi/imazeo-developer.json. It is a curated development snapshot and excludes
-Admin/account operations and the known defective unified Outputs list; use
+/openapi/imazeo-developer.json. It is a curated public API snapshot and excludes
+admin/account operations and the unified Outputs list endpoint; use
 resource-specific lists to enumerate inventory.

@@ -22,7 +22,7 @@
 - PDF merge uses repeated multipart `file` parts in order
 - Integer model types for barcode scale and image hue where applicable
 
-### Deferred (API-key routes exist; not in SDK_BEHAVIOR §1)
+### Out of scope for this SDK
 
 - Tool artifacts CRUD/download
 - Project outputs list

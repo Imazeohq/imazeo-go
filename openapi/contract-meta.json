@@ -2,11 +2,11 @@
   "sdkVersion": "1.0.0",
   "defaultApiVersion": "v1",
   "supportedApiVersions": ["v1"],
-  "openapiContractNote": "Reviewed API-key product contract only: images, transforms, QR, barcode, PDF, and context. Source: backend working tree, 2026-10-02. No deployed parity claimed.",
+  "openapiContractNote": "Public API-key contract for images, transforms, QR, barcode, PDF, and context (API v1).",
   "generatedFromBackend": {
     "date": "2026-10-02",
-    "source": "backend working tree (uncommitted media API review)",
+    "source": "Reviewed public OpenAPI snapshot for API v1",
     "fullSnapshotSha256": "1731af201019f3f5445d8077c052d04b99d4a4a3ba164fd35bf0e468344bc6ee",
-    "sha256": "bfd4fdcb6e39149c9b3d1eacc4178aa8fc47da89c90b8e3ffb156d83457add13"
+    "sha256": "12ec9ccb108fd60a4baaba51591ed5929c8922aff4fae485612ff5736cb4c120"
   }
 }

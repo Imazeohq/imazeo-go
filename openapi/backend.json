@@ -5662,8 +5662,8 @@
     }
   },
   "info": {
-    "title": "Imazeo backend",
-    "description": "Customer APIs use /v1; admin APIs use /admin/v1. Media APIs are project-scoped and accept a customer bearer token or a server-side X-API-Key. JSON responses use success/data/meta envelopes; media responses return bytes. No payment provider is active. Health is operational and unversioned.",
+    "title": "Imazeo API",
+    "description": "Public API-key surface under /v1. Media APIs are project-scoped and authenticate with X-API-Key. JSON responses use success/data/meta envelopes; media responses return bytes. Health is operational and unversioned.",
     "version": "0.1.0",
     "contact": {}
   },

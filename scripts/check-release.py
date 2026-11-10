@@ -13,6 +13,10 @@ version = re.search(MANIFEST_PATTERN, (ROOT / MANIFEST).read_text(), re.MULTILIN
 constant = re.search(CONSTANT_PATTERN, (ROOT / CONSTANT).read_text()).group(1)
 assert re.fullmatch(r"(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)(?:-[0-9A-Za-z.-]+)?", version), "Invalid SemVer"
 assert version == constant, "Package metadata and SDK User-Agent version disagree"
+pkg_path = ROOT / "package.json"
+if pkg_path.is_file():
+    pkg_version = re.search(r'"version"\s*:\s*"([^"]+)"', pkg_path.read_text()).group(1)
+    assert pkg_version == version, "package.json version and SDKVersion disagree"
 if os.environ.get("GITHUB_REF_TYPE") == "tag":
     assert os.environ.get("GITHUB_REF_NAME") == "v" + version, "Tag and SDK version disagree"
 for required in ("LICENSE", "README.md", "GUIDE.md", "CHANGELOG.md"):

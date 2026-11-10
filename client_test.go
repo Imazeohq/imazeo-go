@@ -75,8 +75,9 @@ func TestSendsAPIKeyAndUserAgent(t *testing.T) {
 		if r.Header.Get("X-API-Key") != "secret-key" {
 			t.Fatalf("X-API-Key %q", r.Header.Get("X-API-Key"))
 		}
-		if !strings.HasPrefix(r.Header.Get("User-Agent"), "Imazeo-Go/1.0.0") {
-			t.Fatalf("User-Agent %q", r.Header.Get("User-Agent"))
+		wantUA := "Imazeo-Go/" + imazeo.SDKVersion
+		if r.Header.Get("User-Agent") != wantUA {
+			t.Fatalf("User-Agent %q want %q", r.Header.Get("User-Agent"), wantUA)
 		}
 		if r.Header.Get("Authorization") != "" {
 			t.Fatal("Authorization must not be set")
@@ -374,7 +375,7 @@ func TestTransformCreateBinary(t *testing.T) {
 }
 
 func TestVersionAndCompatibility(t *testing.T) {
-	if imazeo.Version() != "1.0.0" {
+	if imazeo.Version() != imazeo.SDKVersion {
 		t.Fatalf("version %s", imazeo.Version())
 	}
 	def, supported := imazeo.APICompatibility()

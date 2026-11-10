@@ -18,7 +18,7 @@ func main() {
 
 	opts := []imazeo.Option{
 		imazeo.WithAPIKey(apiKey),
-		imazeo.WithBaseURL(envOr("IMAZEO_BASE_URL", "http://localhost:3001")),
+		imazeo.WithBaseURL(envOr("IMAZEO_BASE_URL", "https://api.imazeo.com")),
 	}
 	if pid := os.Getenv("IMAZEO_PROJECT_ID"); pid != "" {
 		opts = append(opts, imazeo.WithProjectID(pid))

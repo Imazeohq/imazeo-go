@@ -1,9 +1,11 @@
 # imazeo-go — agent notes
 
-Independent Go module. Backend OpenAPI/`/v1` is the contract source of truth.
-Follow workspace [docs/SDK_BEHAVIOR.md](../docs/SDK_BEHAVIOR.md).
-Mirror behavioral surface of `../sdk-typescript/`; keep Go idioms (functional
-options, `context.Context`, `[]byte` uploads, `httptest` tests).
-Do not add admin or JWT portal APIs to this client.
-Publish only after the owner creates `Imazeohq/imazeo-go`, then follow
-[RELEASE.md](RELEASE.md). Module path must stay `github.com/Imazeohq/imazeo-go`.
+Independent public Go module (`github.com/Imazeohq/imazeo-go`).
+
+- Contract: published API `v1` (see [GUIDE.md](GUIDE.md))
+- Scope: Context, Images, Transforms, QR, Barcodes, PDF only
+- Keep Go idioms (`context.Context`, functional options, `[]byte` uploads)
+- Do not add admin or customer JWT portal APIs
+- Do not publish without maintainer approval — see [RELEASE.md](RELEASE.md)
+- Module path must stay `github.com/Imazeohq/imazeo-go`
+- Release: `$env:RELEASE_MODE="true"; npm run release` (syncs `version.go`); Actions indexes the module
