@@ -20,7 +20,7 @@ type Client struct {
 	Barcodes   *BarcodesResource
 	PDF        *PDFResource
 
-	http               *httpTransport
+	http                *httpTransport
 	configuredProjectID string
 	resolvedProjectID   string
 	projectMu           sync.Mutex

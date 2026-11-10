@@ -63,28 +63,28 @@ type ImageRecord struct {
 
 // TransformSpec describes image transformation options.
 type TransformSpec struct {
-	Width         *int            `json:"width,omitempty"`
-	Height        *int            `json:"height,omitempty"`
-	Fit           string          `json:"fit,omitempty"`
-	Crop          *CropRect       `json:"crop,omitempty"`
-	Format        string          `json:"format,omitempty"`
-	Quality       *int            `json:"quality,omitempty"`
-	Rotate        *int            `json:"rotate,omitempty"`
-	Flip          *bool           `json:"flip,omitempty"`
-	Flop          *bool           `json:"flop,omitempty"`
-	Optimize      *bool           `json:"optimize,omitempty"`
-	StripMetadata *bool           `json:"stripMetadata,omitempty"`
-	Grayscale     *bool           `json:"grayscale,omitempty"`
-	Negate        *bool           `json:"negate,omitempty"`
-	Blur          *float64        `json:"blur,omitempty"`
-	Sharpen       *float64        `json:"sharpen,omitempty"`
-	Brightness    *float64        `json:"brightness,omitempty"`
-	Saturation    *float64        `json:"saturation,omitempty"`
-	Hue           *int        `json:"hue,omitempty"`
-	Trim          any             `json:"trim,omitempty"`
-	Extend        *ExtendInsets   `json:"extend,omitempty"`
-	Background    string          `json:"background,omitempty"`
-	Position      string          `json:"position,omitempty"`
+	Width         *int          `json:"width,omitempty"`
+	Height        *int          `json:"height,omitempty"`
+	Fit           string        `json:"fit,omitempty"`
+	Crop          *CropRect     `json:"crop,omitempty"`
+	Format        string        `json:"format,omitempty"`
+	Quality       *int          `json:"quality,omitempty"`
+	Rotate        *int          `json:"rotate,omitempty"`
+	Flip          *bool         `json:"flip,omitempty"`
+	Flop          *bool         `json:"flop,omitempty"`
+	Optimize      *bool         `json:"optimize,omitempty"`
+	StripMetadata *bool         `json:"stripMetadata,omitempty"`
+	Grayscale     *bool         `json:"grayscale,omitempty"`
+	Negate        *bool         `json:"negate,omitempty"`
+	Blur          *float64      `json:"blur,omitempty"`
+	Sharpen       *float64      `json:"sharpen,omitempty"`
+	Brightness    *float64      `json:"brightness,omitempty"`
+	Saturation    *float64      `json:"saturation,omitempty"`
+	Hue           *int          `json:"hue,omitempty"`
+	Trim          any           `json:"trim,omitempty"`
+	Extend        *ExtendInsets `json:"extend,omitempty"`
+	Background    string        `json:"background,omitempty"`
+	Position      string        `json:"position,omitempty"`
 }
 
 // CropRect is a pixel crop region.
@@ -123,26 +123,26 @@ type TransformRequest struct {
 
 // TransformationRecord is stored transform metadata.
 type TransformationRecord struct {
-	ID            string         `json:"_id"`
-	ProjectID     string         `json:"projectId"`
-	ImageID       *string        `json:"imageId"`
-	SourceHash    string         `json:"sourceHash"`
-	TransformHash string         `json:"transformHash"`
-	Spec          TransformSpec  `json:"spec"`
-	Mode          TransformMode  `json:"mode"`
-	Bytes         int64          `json:"bytes"`
-	ProcessingMs  int            `json:"processingMs"`
-	Status        string         `json:"status"`
-	SHA256        string         `json:"sha256"`
-	Metadata      ImageMetadata  `json:"metadata"`
-	ExpiresAt     *string        `json:"expiresAt"`
-	CreatedAt     string         `json:"createdAt"`
+	ID            string        `json:"_id"`
+	ProjectID     string        `json:"projectId"`
+	ImageID       *string       `json:"imageId"`
+	SourceHash    string        `json:"sourceHash"`
+	TransformHash string        `json:"transformHash"`
+	Spec          TransformSpec `json:"spec"`
+	Mode          TransformMode `json:"mode"`
+	Bytes         int64         `json:"bytes"`
+	ProcessingMs  int           `json:"processingMs"`
+	Status        string        `json:"status"`
+	SHA256        string        `json:"sha256"`
+	Metadata      ImageMetadata `json:"metadata"`
+	ExpiresAt     *string       `json:"expiresAt"`
+	CreatedAt     string        `json:"createdAt"`
 }
 
 // APIKeyContext is returned by GET /v1/api-key/context.
 type APIKeyContext struct {
-	ProjectID   string `json:"projectId"`
-	KeyID       string `json:"keyId"`
+	ProjectID string `json:"projectId"`
+	KeyID     string `json:"keyId"`
 }
 
 // QRGenerateInput generates a QR code.
@@ -170,9 +170,9 @@ type BarcodeGenerateInput struct {
 
 // PDFInfo is returned by PDF info.
 type PDFInfo struct {
-	PageCount int            `json:"pageCount"`
-	Encrypted bool           `json:"encrypted"`
-	Pages     []PDFPageInfo  `json:"pages"`
+	PageCount int           `json:"pageCount"`
+	Encrypted bool          `json:"encrypted"`
+	Pages     []PDFPageInfo `json:"pages"`
 }
 
 // PDFPageInfo describes a single PDF page.
