@@ -83,9 +83,9 @@ func TestSendsAPIKeyAndUserAgent(t *testing.T) {
 			t.Fatal("Authorization must not be set")
 		}
 		jsonOK(t, w, 200, map[string]any{
-			"projectId":   "proj_1",
-			"keyId":       "key_1",
-					})
+			"projectId": "proj_1",
+			"keyId":     "key_1",
+		})
 	}))
 	defer srv.Close()
 
@@ -110,9 +110,9 @@ func TestResolvesProjectIDFromContext(t *testing.T) {
 		switch {
 		case strings.HasSuffix(r.URL.Path, "/api-key/context"):
 			jsonOK(t, w, 200, map[string]any{
-				"projectId":   "proj_auto",
-				"keyId":       "k",
-							})
+				"projectId": "proj_auto",
+				"keyId":     "k",
+			})
 		case strings.Contains(r.URL.Path, "/projects/proj_auto/images"):
 			jsonOK(t, w, 200, []any{})
 		default:
