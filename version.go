@@ -3,7 +3,7 @@ package imazeo
 import "time"
 
 // SDKVersion is the package SemVer (independent of the API path version).
-const SDKVersion = "1.0.0"
+const SDKVersion = "1.0.1"
 
 // DefaultAPIVersion is the default path prefix under the API origin.
 const DefaultAPIVersion = "v1"
