@@ -15,14 +15,14 @@ type PDFResource struct {
 }
 
 // Info returns PDF metadata for an uploaded document.
-func (r *PDFResource) Info(ctx context.Context, data []byte, opts *UploadOptions) (*PDFInfo, error) {
+func (r *PDFResource) Info(ctx context.Context, data []byte, opts *UploadOptions, processing ...ProcessingOptions) (*PDFInfo, error) {
 	projectID, err := r.projectID(ctx)
 	if err != nil {
 		return nil, err
 	}
 	file := prepareBytes(data, opts, "document.pdf", "application/pdf")
 	rawURL := r.http.path("projects", projectID, "tools", "pdf", "info")
-	raw, _, err := r.http.requestMultipartJSON(ctx, "POST", rawURL, []multipartFile{file}, nil, nil, r.http.config.pdfTO)
+	raw, _, err := r.http.requestMultipartJSON(ctx, "POST", rawURL, []multipartFile{file}, nil, nil, r.http.config.pdfTO, processingHeaders(processing))
 	if err != nil {
 		return nil, err
 	}
@@ -34,7 +34,7 @@ func (r *PDFResource) Info(ctx context.Context, data []byte, opts *UploadOptions
 }
 
 // Render renders PDF pages. Single-page responses are binary; multi-page may be JSON.
-func (r *PDFResource) Render(ctx context.Context, data []byte, opts *PDFRenderOptions) (*PDFRenderResult, error) {
+func (r *PDFResource) Render(ctx context.Context, data []byte, opts *PDFRenderOptions, processing ...ProcessingOptions) (*PDFRenderResult, error) {
 	projectID, err := r.projectID(ctx)
 	if err != nil {
 		return nil, err
@@ -72,7 +72,7 @@ func (r *PDFResource) Render(ctx context.Context, data []byte, opts *PDFRenderOp
 	if qs := q.Encode(); qs != "" {
 		rawURL += "?" + qs
 	}
-	bin, jsonData, meta, err := r.http.requestMultipartBinary(ctx, "POST", rawURL, []multipartFile{file}, nil, r.http.config.pdfTO)
+	bin, jsonData, meta, err := r.http.requestMultipartBinary(ctx, "POST", rawURL, []multipartFile{file}, nil, r.http.config.pdfTO, processingHeaders(processing))
 	if err != nil {
 		return nil, err
 	}
@@ -89,7 +89,7 @@ func (r *PDFResource) Render(ctx context.Context, data []byte, opts *PDFRenderOp
 }
 
 // Merge concatenates one or more PDFs into a single PDF binary.
-func (r *PDFResource) Merge(ctx context.Context, files [][]byte) (*BinaryResult, error) {
+func (r *PDFResource) Merge(ctx context.Context, files [][]byte, processing ...ProcessingOptions) (*BinaryResult, error) {
 	if len(files) == 0 {
 		return nil, fmt.Errorf("at least one PDF is required")
 	}
@@ -105,7 +105,7 @@ func (r *PDFResource) Merge(ctx context.Context, files [][]byte) (*BinaryResult,
 		}, fmt.Sprintf("file-%d.pdf", i+1), "application/pdf"))
 	}
 	rawURL := r.http.path("projects", projectID, "tools", "pdf", "merge")
-	bin, _, _, err := r.http.requestMultipartBinary(ctx, "POST", rawURL, parts, nil, r.http.config.pdfTO)
+	bin, _, _, err := r.http.requestMultipartBinary(ctx, "POST", rawURL, parts, nil, r.http.config.pdfTO, processingHeaders(processing))
 	if err != nil {
 		return nil, err
 	}
@@ -116,7 +116,7 @@ func (r *PDFResource) Merge(ctx context.Context, files [][]byte) (*BinaryResult,
 }
 
 // Extract returns a PDF containing selected pages.
-func (r *PDFResource) Extract(ctx context.Context, data []byte, opts PDFExtractOptions) (*BinaryResult, error) {
+func (r *PDFResource) Extract(ctx context.Context, data []byte, opts PDFExtractOptions, processing ...ProcessingOptions) (*BinaryResult, error) {
 	projectID, err := r.projectID(ctx)
 	if err != nil {
 		return nil, err
@@ -140,7 +140,7 @@ func (r *PDFResource) Extract(ctx context.Context, data []byte, opts PDFExtractO
 	if qs := q.Encode(); qs != "" {
 		rawURL += "?" + qs
 	}
-	bin, _, _, err := r.http.requestMultipartBinary(ctx, "POST", rawURL, []multipartFile{file}, nil, r.http.config.pdfTO)
+	bin, _, _, err := r.http.requestMultipartBinary(ctx, "POST", rawURL, []multipartFile{file}, nil, r.http.config.pdfTO, processingHeaders(processing))
 	if err != nil {
 		return nil, err
 	}

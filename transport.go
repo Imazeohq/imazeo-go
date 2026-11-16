@@ -111,7 +111,7 @@ func (t *httpTransport) withTimeout(ctx context.Context, d time.Duration) (conte
 	return context.WithTimeout(ctx, d)
 }
 
-func (t *httpTransport) requestJSON(ctx context.Context, method, rawURL string, body any, timeout time.Duration) (*http.Response, []byte, error) {
+func (t *httpTransport) requestJSON(ctx context.Context, method, rawURL string, body any, timeout time.Duration, extra ...map[string]string) (*http.Response, []byte, error) {
 	var reader io.Reader
 	headers := map[string]string{
 		"Accept":     "application/json",
@@ -125,6 +125,11 @@ func (t *httpTransport) requestJSON(ctx context.Context, method, rawURL string, 
 		}
 		reader = bytes.NewReader(b)
 		headers["Content-Type"] = "application/json"
+	}
+	for _, values := range extra {
+		for k, v := range values {
+			headers[k] = v
+		}
 	}
 	return t.send(ctx, method, rawURL, reader, headers, timeout)
 }
@@ -178,7 +183,7 @@ type multipartFile struct {
 	Data        []byte
 }
 
-func (t *httpTransport) requestMultipartJSON(ctx context.Context, method, rawURL string, files []multipartFile, fields map[string]string, uploadLength *int64, timeout time.Duration) ([]byte, responseMeta, error) {
+func (t *httpTransport) requestMultipartJSON(ctx context.Context, method, rawURL string, files []multipartFile, fields map[string]string, uploadLength *int64, timeout time.Duration, extra ...map[string]string) ([]byte, responseMeta, error) {
 	body, contentType, totalLen, err := buildMultipart(files, fields)
 	if err != nil {
 		return nil, responseMeta{}, err
@@ -193,6 +198,11 @@ func (t *httpTransport) requestMultipartJSON(ctx context.Context, method, rawURL
 		headers["X-Upload-Length"] = strconv.FormatInt(*uploadLength, 10)
 	} else if totalLen >= 0 {
 		// For single-file uploads callers should pass exact file byte length.
+	}
+	for _, values := range extra {
+		for k, v := range values {
+			headers[k] = v
+		}
 	}
 	resp, raw, err := t.send(ctx, method, rawURL, body, headers, timeout)
 	if err != nil {
@@ -209,7 +219,7 @@ func (t *httpTransport) requestMultipartJSON(ctx context.Context, method, rawURL
 	return data, meta, nil
 }
 
-func (t *httpTransport) requestMultipartBinary(ctx context.Context, method, rawURL string, files []multipartFile, uploadLength *int64, timeout time.Duration) (*BinaryResult, json.RawMessage, responseMeta, error) {
+func (t *httpTransport) requestMultipartBinary(ctx context.Context, method, rawURL string, files []multipartFile, uploadLength *int64, timeout time.Duration, extra ...map[string]string) (*BinaryResult, json.RawMessage, responseMeta, error) {
 	body, contentType, _, err := buildMultipart(files, nil)
 	if err != nil {
 		return nil, nil, responseMeta{}, err
@@ -222,6 +232,11 @@ func (t *httpTransport) requestMultipartBinary(ctx context.Context, method, rawU
 	}
 	if uploadLength != nil {
 		headers["X-Upload-Length"] = strconv.FormatInt(*uploadLength, 10)
+	}
+	for _, values := range extra {
+		for k, v := range values {
+			headers[k] = v
+		}
 	}
 	resp, raw, err := t.send(ctx, method, rawURL, body, headers, timeout)
 	if err != nil {
@@ -242,9 +257,9 @@ func (t *httpTransport) requestMultipartBinary(ctx context.Context, method, rawU
 	return binaryFromResponse(resp, raw, false, ""), nil, responseMeta{}, nil
 }
 
-func doJSON[T any](t *httpTransport, ctx context.Context, method, rawURL string, body any, timeout time.Duration) (jsonSuccess[T], error) {
+func doJSON[T any](t *httpTransport, ctx context.Context, method, rawURL string, body any, timeout time.Duration, headers ...map[string]string) (jsonSuccess[T], error) {
 	var zero jsonSuccess[T]
-	resp, raw, err := t.requestJSON(ctx, method, rawURL, body, timeout)
+	resp, raw, err := t.requestJSON(ctx, method, rawURL, body, timeout, headers...)
 	if err != nil {
 		return zero, err
 	}

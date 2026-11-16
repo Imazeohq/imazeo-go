@@ -2,15 +2,15 @@
 
 Official **server-side** Go SDK for Imazeo.
 
-|                |                                          |
-| -------------- | ---------------------------------------- |
-| Module         | `github.com/Imazeohq/imazeo-go`          |
-| SDK version    | `1.0.0`                                  |
-| Default API    | `v1`                                     |
-| Supported APIs | `v1`                                     |
-| Go             | **1.22+**                                |
+|                |                                                                |
+| -------------- | -------------------------------------------------------------- |
+| Module         | `github.com/Imazeohq/imazeo-go`                                |
+| SDK version    | `1.0.1`                                                        |
+| Default API    | `v1`                                                           |
+| Supported APIs | `v1`                                                           |
+| Go             | **1.22+**                                                      |
 | Registry       | [pkg.go.dev](https://pkg.go.dev/github.com/Imazeohq/imazeo-go) |
-| Source         | [GitHub](https://github.com/Imazeohq/imazeo-go) |
+| Source         | [GitHub](https://github.com/Imazeohq/imazeo-go)                |
 
 > **Security:** Secret API keys (`X-API-Key`) are for trusted servers only.
 > Do **not** ship this client with a secret key in browsers or end-user apps.
@@ -81,14 +81,20 @@ Sends `X-API-Key` only. Never send `Authorization` together with an API key
 
 ## Resources
 
-| Resource            | Methods                                                                       |
-| ------------------- | ----------------------------------------------------------------------------- |
-| `client.Context`    | `Get` → project/key IDs                                                       |
-| `client.Images`     | `Upload`, `List` (`Page`/`Limit`/`Q`), `Get`, `Delete`, `Download`            |
-| `client.Transforms` | `Create`, `List`, `Get`, `Download` (`IfNoneMatch` → `NotModified`), `Delete` |
-| `client.QR`         | `Generate`                                                                    |
-| `client.Barcodes`   | `Generate`                                                                    |
-| `client.PDF`        | `Info`, `Render`, `Merge`, `Extract`                                          |
+| Resource              | Methods                                                                                               |
+| --------------------- | ----------------------------------------------------------------------------------------------------- |
+| `client.Context`      | `Get` → project/key IDs                                                                               |
+| `client.Images`       | `Upload`, `List` (`Page`/`Limit`/`Q`), `Get`, `Delete`, `Download`                                    |
+| `client.Transforms`   | `Create`, `List`, `Get`, `Download` (`IfNoneMatch` → `NotModified`), `Delete`                         |
+| `client.QR`           | `Generate`                                                                                            |
+| `client.Barcodes`     | `Generate`                                                                                            |
+| `client.PDF`          | `Info`, `Render`, `Merge`, `Extract`                                                                  |
+| `client.Credits`      | Quote processing credits for an operation and measurable units                                        |
+| `client.Operations`   | Get status, look up by kind/key, and recover a temporary result                                       |
+| `client.Conversions`  | DOCX, XLSX, PPTX and website jobs: capabilities, submit, list, lookup, get, cancel, download and save |
+| `client.DynamicCodes` | Capabilities, create, list, get, edit, scan analytics and CSV export                                  |
+| `client.Artifacts`    | Save preview bytes, list, get, download and delete private artifacts                                  |
+| `client.Outputs`      | List project outputs and retrieve counts by type                                                      |
 
 ### Upload + transform
 
@@ -144,16 +150,16 @@ Typed errors: `AuthenticationError`, `AuthorizationError`, `ValidationError`,
 
 ## Configuration
 
-| Option             | Default                  | Notes                                  |
-| ------------------ | ------------------------ | -------------------------------------- |
-| `WithAPIKey`       | required                 | Secret key                             |
-| `WithProjectID`    | from context             | Path project                           |
-| `WithBaseURL`      | `https://api.imazeo.com` | Origin only; `/v1` stripped if present |
-| `WithAPIVersion`   | `v1`                     | Allowlisted                            |
-| `WithTimeout`      | `60s`                    | Image upload / transform / download    |
-| `WithLightTimeout` | `30s`                    | Context, QR, barcode                   |
-| `WithPDFTimeout`   | `120s`                   | PDF tools                              |
-| `WithAppName`      | —                        | Appended to User-Agent                 |
+| Option             | Default                  | Notes                                          |
+| ------------------ | ------------------------ | ---------------------------------------------- |
+| `WithAPIKey`       | required                 | Secret key                                     |
+| `WithProjectID`    | from context             | Path project                                   |
+| `WithBaseURL`      | `https://api.imazeo.com` | Origin only; `/v1` stripped if present         |
+| `WithAPIVersion`   | `v1`                     | Allowlisted                                    |
+| `WithTimeout`      | `60s`                    | Image upload / transform / download            |
+| `WithLightTimeout` | `30s`                    | Context, QR, barcode                           |
+| `WithPDFTimeout`   | `120s`                   | PDF tools                                      |
+| `WithAppName`      | —                        | Appended to User-Agent                         |
 | `WithHTTPClient`   | default client           | Tests / custom agents; redirects still refused |
 
 User-Agent: `Imazeo-Go/1.0.0`.

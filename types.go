@@ -147,6 +147,8 @@ type APIKeyContext struct {
 
 // QRGenerateInput generates a QR code.
 type QRGenerateInput struct {
+    Transparent *bool `json:"transparent,omitempty"`
+    Design *CodeDesign `json:"design,omitempty"`
 	Content         string `json:"content"`
 	Format          string `json:"format,omitempty"`
 	Size            int    `json:"size,omitempty"`
@@ -158,6 +160,8 @@ type QRGenerateInput struct {
 
 // BarcodeGenerateInput generates a barcode.
 type BarcodeGenerateInput struct {
+    Transparent *bool `json:"transparent,omitempty"`
+    Design *CodeDesign `json:"design,omitempty"`
 	Type        string `json:"type"`
 	Content     string `json:"content"`
 	Format      string `json:"format,omitempty"`
