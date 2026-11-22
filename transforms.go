@@ -14,7 +14,7 @@ type TransformsResource struct {
 }
 
 // Create runs a transform and returns binary output.
-func (r *TransformsResource) Create(ctx context.Context, req TransformRequest) (*BinaryResult, error) {
+func (r *TransformsResource) Create(ctx context.Context, req TransformRequest, processing ...ProcessingOptions) (*BinaryResult, error) {
 	if req.ImageID == "" && req.URL == "" {
 		return nil, fmt.Errorf("exactly one of imageId or url is required")
 	}
@@ -26,10 +26,7 @@ func (r *TransformsResource) Create(ctx context.Context, req TransformRequest) (
 		return nil, err
 	}
 	rawURL := r.http.path("projects", projectID, "transforms")
-	return r.http.requestBinary(ctx, "POST", rawURL, req, map[string]string{
-		"Content-Type": "application/json",
-		"Accept":       "*/*",
-	}, r.http.config.timeout)
+	return r.http.requestBinary(ctx, "POST", rawURL, req, processingHeaders(processing), r.http.config.timeout)
 }
 
 // List returns a page of transformations.

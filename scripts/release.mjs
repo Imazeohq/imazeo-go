@@ -59,6 +59,18 @@ function preflight() {
   if (dirty.status === 0 && (dirty.stdout || '').trim()) {
     fail('working tree must be clean; commit or stash changes first');
   }
+
+  // GitHub Release is created by release-it only (not Actions). Refresh tags first
+  // so the bump prompt does not reuse a tag that already exists on origin.
+  const fetch = capture('git', ['fetch', 'origin', 'main', '--tags', '--prune']);
+  if (fetch.status !== 0) {
+    fail('git fetch origin main --tags failed; check network/auth');
+  }
+
+  const behind = capture('git', ['rev-list', '--count', 'HEAD..origin/main']);
+  if (behind.status === 0 && Number((behind.stdout || '').trim()) > 0) {
+    fail('main is behind origin/main; pull/rebase before release');
+  }
 }
 
 if (process.env.GITHUB_ACTIONS === 'true') {
