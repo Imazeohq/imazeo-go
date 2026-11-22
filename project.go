@@ -8,8 +8,8 @@ import (
 )
 
 type projectResource struct {
-	http		*httpTransport
-	projectID	func(context.Context) (string, error)
+	http      *httpTransport
+	projectID func(context.Context) (string, error)
 }
 
 func (r *projectResource) path(ctx context.Context, parts []string, query any) (string, error) {
@@ -63,11 +63,11 @@ func projectPage[T any](r *projectResource, ctx context.Context, parts []string,
 		return nil, err
 	}
 	return &Page[T]{
-		Items: result.Data,
-		Page: intPtrOr(result.Meta.Page, 1),
-		Limit: intPtrOr(result.Meta.Limit, 20),
-		Total: intPtrOr(result.Meta.Total, len(result.Data)),
-		Pages: intPtrOr(result.Meta.Pages, 1),
+		Items:     result.Data,
+		Page:      intPtrOr(result.Meta.Page, 1),
+		Limit:     intPtrOr(result.Meta.Limit, 20),
+		Total:     intPtrOr(result.Meta.Total, len(result.Data)),
+		Pages:     intPtrOr(result.Meta.Pages, 1),
 		RequestID: result.Meta.RequestID,
 	}, nil
 }

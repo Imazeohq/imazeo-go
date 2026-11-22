@@ -1,6 +1,7 @@
 package imazeo
 
 import "context"
+
 type OutputsResource struct {
 	projectResource
 }

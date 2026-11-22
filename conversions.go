@@ -1,9 +1,10 @@
 package imazeo
 
 import (
-	"encoding/json"
 	"context"
+	"encoding/json"
 )
+
 type ConversionsResource struct {
 	projectResource
 }
@@ -53,7 +54,7 @@ func (r *ConversionsResource) upload(ctx context.Context, engine string, data []
 	if err != nil {
 		return nil, err
 	}
-	file := prepareBytes(data, nil, "document." + engine, "")
+	file := prepareBytes(data, nil, "document."+engine, "")
 	length := int64(len(data))
 	raw, _, err := r.http.requestMultipartJSON(ctx, "POST", rawURL, []multipartFile{file}, nil, &length, r.http.config.timeout, request.headers())
 	if err != nil {

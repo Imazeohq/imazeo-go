@@ -1,9 +1,10 @@
 package imazeo
 
 import (
-	"encoding/json"
 	"context"
+	"encoding/json"
 )
+
 type ArtifactsResource struct {
 	projectResource
 }
@@ -30,7 +31,7 @@ func (r *ArtifactsResource) Save(ctx context.Context, data []byte, input Artifac
 		return nil, err
 	}
 	fields := map[string]string{
-		"kind": input.Kind,
+		"kind":        input.Kind,
 		"displayName": input.DisplayName,
 		"contentType": input.ContentType,
 	}

@@ -147,29 +147,29 @@ type APIKeyContext struct {
 
 // QRGenerateInput generates a QR code.
 type QRGenerateInput struct {
-    Transparent *bool `json:"transparent,omitempty"`
-    Design *CodeDesign `json:"design,omitempty"`
-	Content         string `json:"content"`
-	Format          string `json:"format,omitempty"`
-	Size            int    `json:"size,omitempty"`
-	Margin          *int   `json:"margin,omitempty"`
-	ErrorCorrection string `json:"errorCorrection,omitempty"`
-	Foreground      string `json:"foreground,omitempty"`
-	Background      string `json:"background,omitempty"`
+	Transparent     *bool       `json:"transparent,omitempty"`
+	Design          *CodeDesign `json:"design,omitempty"`
+	Content         string      `json:"content"`
+	Format          string      `json:"format,omitempty"`
+	Size            int         `json:"size,omitempty"`
+	Margin          *int        `json:"margin,omitempty"`
+	ErrorCorrection string      `json:"errorCorrection,omitempty"`
+	Foreground      string      `json:"foreground,omitempty"`
+	Background      string      `json:"background,omitempty"`
 }
 
 // BarcodeGenerateInput generates a barcode.
 type BarcodeGenerateInput struct {
-    Transparent *bool `json:"transparent,omitempty"`
-    Design *CodeDesign `json:"design,omitempty"`
-	Type        string `json:"type"`
-	Content     string `json:"content"`
-	Format      string `json:"format,omitempty"`
-	Scale       *int   `json:"scale,omitempty"`
-	Height      *int   `json:"height,omitempty"`
-	IncludeText *bool  `json:"includeText,omitempty"`
-	Foreground  string `json:"foreground,omitempty"`
-	Background  string `json:"background,omitempty"`
+	Transparent *bool       `json:"transparent,omitempty"`
+	Design      *CodeDesign `json:"design,omitempty"`
+	Type        string      `json:"type"`
+	Content     string      `json:"content"`
+	Format      string      `json:"format,omitempty"`
+	Scale       *int        `json:"scale,omitempty"`
+	Height      *int        `json:"height,omitempty"`
+	IncludeText *bool       `json:"includeText,omitempty"`
+	Foreground  string      `json:"foreground,omitempty"`
+	Background  string      `json:"background,omitempty"`
 }
 
 // PDFInfo is returned by PDF info.

@@ -1,10 +1,11 @@
 package imazeo
 
 import (
+	"context"
 	"encoding/json"
 	"strings"
-	"context"
 )
+
 type OperationsResource struct {
 	projectResource
 }
@@ -16,6 +17,7 @@ func (r *OperationsResource) Get(ctx context.Context, id string) (*ProcessingSta
 func (r *OperationsResource) Lookup(ctx context.Context, input ProcessingLookupInput) (*ProcessingStatus, error) {
 	return projectJSON[ProcessingStatus](&r.projectResource, ctx, "POST", []string{"operations", "lookup"}, input, nil, nil)
 }
+
 // Result returns either binary content or unwrapped structured JSON.
 func (r *OperationsResource) Result(ctx context.Context, id string) (*BinaryResult, json.RawMessage, error) {
 	result, err := r.binary(ctx, []string{"operations", id, "result"}, nil)

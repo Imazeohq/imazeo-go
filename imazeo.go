@@ -13,18 +13,18 @@ import (
 //
 // Uses secret X-API-Key authentication. Do not embed API keys in browsers.
 type Client struct {
-	Context    *ContextResource
-	Images     *ImagesResource
-	Transforms *TransformsResource
-	QR         *QRResource
-	Barcodes   *BarcodesResource
-    Credits *CreditsResource
-    Operations *OperationsResource
-    Outputs *OutputsResource
-    DynamicCodes *DynamicCodesResource
-    Artifacts *ArtifactsResource
-    Conversions *ConversionsResource
-	PDF        *PDFResource
+	Context      *ContextResource
+	Images       *ImagesResource
+	Transforms   *TransformsResource
+	QR           *QRResource
+	Barcodes     *BarcodesResource
+	Credits      *CreditsResource
+	Operations   *OperationsResource
+	Outputs      *OutputsResource
+	DynamicCodes *DynamicCodesResource
+	Artifacts    *ArtifactsResource
+	Conversions  *ConversionsResource
+	PDF          *PDFResource
 
 	http                *httpTransport
 	configuredProjectID string
@@ -193,12 +193,12 @@ func New(opts ...Option) (*Client, error) {
 	c.Transforms = &TransformsResource{http: tr, projectID: c.resolveProjectID}
 	c.QR = &QRResource{http: tr, projectID: c.resolveProjectID}
 	c.Barcodes = &BarcodesResource{http: tr, projectID: c.resolveProjectID}
-    c.Credits = &CreditsResource{projectResource{http:tr,projectID:c.resolveProjectID}}
-    c.Operations = &OperationsResource{projectResource{http:tr,projectID:c.resolveProjectID}}
-    c.Outputs = &OutputsResource{projectResource{http:tr,projectID:c.resolveProjectID}}
-    c.DynamicCodes = &DynamicCodesResource{projectResource{http:tr,projectID:c.resolveProjectID}}
-    c.Artifacts = &ArtifactsResource{projectResource{http:tr,projectID:c.resolveProjectID}}
-    c.Conversions = &ConversionsResource{projectResource{http:tr,projectID:c.resolveProjectID}}
+	c.Credits = &CreditsResource{projectResource{http: tr, projectID: c.resolveProjectID}}
+	c.Operations = &OperationsResource{projectResource{http: tr, projectID: c.resolveProjectID}}
+	c.Outputs = &OutputsResource{projectResource{http: tr, projectID: c.resolveProjectID}}
+	c.DynamicCodes = &DynamicCodesResource{projectResource{http: tr, projectID: c.resolveProjectID}}
+	c.Artifacts = &ArtifactsResource{projectResource{http: tr, projectID: c.resolveProjectID}}
+	c.Conversions = &ConversionsResource{projectResource{http: tr, projectID: c.resolveProjectID}}
 	c.PDF = &PDFResource{http: tr, projectID: c.resolveProjectID}
 	return c, nil
 }
