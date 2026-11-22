@@ -5,7 +5,7 @@ Official **server-side** Go SDK for Imazeo.
 |                |                                                                |
 | -------------- | -------------------------------------------------------------- |
 | Module         | `github.com/Imazeohq/imazeo-go`                                |
-| SDK version    | `1.0.1`                                                        |
+| SDK version    | `1.1.0`                                                        |
 | Default API    | `v1`                                                           |
 | Supported APIs | `v1`                                                           |
 | Go             | **1.22+**                                                      |
@@ -20,7 +20,7 @@ Integration contract and learning path: [GUIDE.md](GUIDE.md).
 ## Install
 
 ```bash
-go get github.com/Imazeohq/imazeo-go@v1.0.0
+go get github.com/Imazeohq/imazeo-go@v1.1.0
 ```
 
 Requires Go 1.22+. Create a project API key in the
@@ -162,12 +162,12 @@ Typed errors: `AuthenticationError`, `AuthorizationError`, `ValidationError`,
 | `WithAppName`      | —                        | Appended to User-Agent                         |
 | `WithHTTPClient`   | default client           | Tests / custom agents; redirects still refused |
 
-User-Agent: `Imazeo-Go/1.0.0`.
+User-Agent: `Imazeo-Go/1.1.0`.
 
 ## API version vs package version
 
 - **API** path version: `v1` (via `WithAPIVersion`)
-- **SDK** SemVer: `1.0.0` (`imazeo.SDKVersion`)
+- **SDK** SemVer: `1.1.0` (`imazeo.SDKVersion`)
 
 `imazeo.APICompatibility()` reports supported API versions.
 

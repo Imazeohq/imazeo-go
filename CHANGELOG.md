@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.1.0
+
+### Added
+
+- Project context, credit quotes, processing operations, conversions, dynamic QR, artifacts and outputs APIs
+
 ## 1.0.0
 
 ### Added
